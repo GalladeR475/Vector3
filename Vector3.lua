@@ -28,39 +28,51 @@ Vector3.YZ              = Vector3.new(0, 1, 1);
 
 -- << VECTOR ARITHMETIC >> --
 function Vector3:__add(v2)
+    if (type(v2) ~= "number") or (type(v2) ~= "table") then
+        error(createError("add", type(v2)));
+    end;
+
     if (type(v2) == "number") then
         return Vector3.new(self.X + v2, self.Y + v2, self.Z + v2);
     elseif (v2.X and v2.Y and v2.Z) then
         return Vector3.new(self.X + v2.X, self.Y + v2.Y, self.Z + v2.Z);
     end;
-    error(createError("add", type(v2)));
 end;
 
 function Vector3:__sub(v2)
+    if (type(v2) ~= "number") or (type(v2) ~= "table") then
+        error(createError("add", type(v2)));
+    end;
+
     if (type(v2) == "number") then
         return Vector3.new(self.X - v2, self.Y - v2, self.Z - v2);
     elseif (v2.X and v2.Y and v2.Z) then
         return Vector3.new(self.X - v2.X, self.Y - v2.Y, self.Z - v2.Z);
     end;
-    error(createError("sub", type(v2)));
 end
 
 function Vector3:__mul(v2)
+    if (type(v2) ~= "number") or (type(v2) ~= "table") then
+        error(createError("add", type(v2)));
+    end;
+
     if (type(v2) == "number") then
         return Vector3.new(self.X * v2, self.Y * v2, self.Z * v2);
     elseif (v2.X and v2.Y and v2.Z) then
         return Vector3.new(self.X * v2.X, self.Y * v2.Y, self.Z * v2.Z);
     end;
-    error(createError("mul", type(v2)));
 end
 
 function Vector3:__div(v2)
+    if (type(v2) ~= "number") or (type(v2) ~= "table") then
+        error(createError("add", type(v2)));
+    end;
+
     if (type(v2) == "number") then
         return Vector3.new(self.X / v2, self.Y / v2, self.Z / v2);
     elseif (v2.X and v2.Y and v2.Z) then
         return Vector3.new(self.X / v2.X, self.Y / v2.Y, self.Z / v2.Z);
     end;
-    error(createError("div", type(v2)));
 end
 
 -- << GLOBAL FUNCTIONS >> --
@@ -100,15 +112,15 @@ function Vector3:Unit()
     return Unit;
 end;
 
-function Vector3:Dot(v1, v2)
-    return v1.X * v2.X + v1.Y * v2.Y + v1.Z * v2.Z;
+function Vector3:Dot(v2)
+    return self.X * v2.X + self.Y * v2.Y + self.Z * v2.Z;
 end; 
 
-function Vector3:Cross(v1, v2)
+function Vector3:Cross(v2)
     return Vector3.new(
-        v1.Y * v2.Z - v1.Z * v2.Y,
-        v1.Z * v2.X - v1.X * v2.Z,
-        v1.X * v2.Y - v1.Y * v2.X
+        self.Y * v2.Z - self.Z * v2.Y,
+        self.Z * v2.X - self.X * v2.Z,
+        self.X * v2.Y - self.Y * v2.X
     );
 end;
 
